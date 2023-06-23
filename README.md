@@ -34,3 +34,32 @@ Another approach is feature detection. With feature detection, developers check 
 
 By using these techniques, developers can leverage the power of ES6 features in their codebases while still ensuring compatibility with older browsers that may not support those features natively. This allows for a more modern and expressive JavaScript development experience without sacrificing broader browser support.
 
+
+### What are generators in JS?
+
+Generators are a special type of function in JavaScript that can be paused and resumed, allowing for more control over iteration. They are defined using the `function*` syntax and make use of the `yield` keyword to pause the function's execution and return a value.
+
+Generators provide a way to create an iterable object that can be iterated over using a loop or consumed in other ways. Unlike regular functions that run to completion and return a single value, generators allow for multiple values to be generated over time.
+
+Here's an example of a simple generator function:
+
+```javascript
+function* countToThree() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const generator = countToThree();
+
+console.log(generator.next().value); // Output: 1
+console.log(generator.next().value); // Output: 2
+console.log(generator.next().value); // Output: 3
+console.log(generator.next().value); // Output: undefined
+```
+
+In the example above, countToThree is a generator function that generates the numbers 1, 2, and 3. When the generator function is called, it returns an iterator object. We can use the next() method on the iterator to retrieve the next value in the sequence.
+
+The yield keyword is used to pause the function's execution and return a value. Each time yield is encountered, the generator function halts and returns the value specified. The next time next() is called on the iterator, the generator resumes execution from the previous yield statement.
+
+Generators are particularly useful when dealing with large datasets, asynchronous operations, or scenarios that require lazy evaluation. They provide a powerful mechanism for controlling the flow of execution and producing values on demand.
