@@ -63,3 +63,55 @@ In the example above, countToThree is a generator function that generates the nu
 The yield keyword is used to pause the function's execution and return a value. Each time yield is encountered, the generator function halts and returns the value specified. The next time next() is called on the iterator, the generator resumes execution from the previous yield statement.
 
 Generators are particularly useful when dealing with large datasets, asynchronous operations, or scenarios that require lazy evaluation. They provide a powerful mechanism for controlling the flow of execution and producing values on demand.
+
+### What are callbacks?
+
+Callbacks are functions that are passed as arguments to other functions and are executed at a later point in time or when a certain condition is met. They are commonly used in asynchronous programming to handle the results of an asynchronous operation or to perform tasks after an operation completes.
+
+#### Callback Hell
+
+Callback Hell, also known as the Pyramid of Doom, is a situation that arises when working with multiple asynchronous operations that depend on each other. It occurs when callbacks are nested within callbacks, resulting in deeply nested and hard-to-read code.
+
+Here's an example of Callback Hell:
+
+```javascript
+asyncOperation1(function (error, result1) {
+  if (error) {
+    // Handle error
+  } else {
+    asyncOperation2(function (error, result2) {
+      if (error) {
+        // Handle error
+      } else {
+        asyncOperation3(function (error, result3) {
+          if (error) {
+            // Handle error
+          } else {
+            // Perform operation with result1, result2, and result3
+          }
+        });
+      }
+    });
+  }
+});
+```
+
+As you can see, each asynchronous operation requires a callback function, leading to nested code that can quickly become difficult to manage and understand. This nesting makes it challenging to handle errors, maintain code readability, and manage the flow of execution.
+
+#### Callback Example
+```javascript
+function greet(name, callback) {
+  const greeting = `Hello, ${name}!`;
+  callback(greeting);
+}
+
+function displayGreeting(greeting) {
+  console.log(greeting);
+}
+
+greet("John", displayGreeting); // Output: Hello, John!
+```
+
+In the example above, the greet function accepts a name parameter and a callback function. It generates a greeting message and passes it to the callback function. The displayGreeting function is defined separately and is passed as the callback argument to greet. When greet is called, it invokes the displayGreeting function, which simply logs the greeting to the console.
+
+Callbacks allow for asynchronous operations, such as fetching data from a server or reading a file, to notify when they're done and pass the results to the callback function for further processing.
